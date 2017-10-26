@@ -1,18 +1,24 @@
-<h1 class="is-size-2 has-text-weight-bold has-text-centered">Products</h1>
+<h1 class="is-size-2 has-text-weight-bold">Products</h1>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li class="is-active"><a href="#" aria-current="page">Products</a></li>
+    </ul>
+</nav>
 <ul class="columns">
     <% @products.each do |product| %>
         <li class="column has-text-centered">
             <div>
 
                 <%= link_to "#" do %>
-                    <p><img src="https://images-na.ssl-images-amazon.com/images/I/417I-l5zPHL._SY445_QL70_.jpg" width="150" alt="<%= product.name %>" %></p>
+                    <p><%= product_image %></p>
                     <%= product.name %>
                 <% end %>
             </div>
             <p> <%= product.price %> </p>
-            <%= link_to "Add to cart", "", class: 'button' %>
+            <%= link_to "Add to cart", cart_add_product_path(product) , class: 'button', method: :post %>
         </li>
 
     <% end %>
-    
+
 </ul>

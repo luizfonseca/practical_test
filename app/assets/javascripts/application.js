@@ -13,3 +13,19 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+
+
+
+
+
+var deleteBtn = document.querySelector(".delete");
+
+if (deleteBtn != null) {
+  deleteBtn.addEventListener('click', function(){
+    var notification = document.querySelector('.flash.notification');
+    notification.style.display = "none";
+  });
+}
+
+

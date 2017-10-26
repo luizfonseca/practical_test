@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PracticalTest</title>
-    <%= csrf_meta_tags %>
+    <head>
+        <title>Cart System</title>
+        <%= csrf_meta_tags %>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <body>
+        <% if alert or notice %>
+            <div class="notification is-info flash">
+                <button class="delete"></button>
+                <%= alert or notice %>
+            </div> 
+        <% end %>
+        <div class="section" style="padding-top: 0;">
 
-  <body>
-    <%= yield %>
-  </body>
+
+            <nav class="navbar" role="navigation" aria-label="main navigation"  style="background: #333; padding: 1em;">
+                <div class="navbar-start">
+                    <a href="/"><%= image_tag "https://res.cloudinary.com/wityourself/image/upload/f_auto,fl_lossy,q_auto/v1503419733/witliving/logo_witSoulBrands.png", style: 'width: 135px; height: 36px;' %></a>
+                    <!-- navbar items, navbar burger... -->
+                </div>
+
+
+                <div class="navbar-end">
+                    <%= link_to "My Cart #{display_cart_info(current_user)}", cart_path, class: 'button'%>
+                    <% if current_user %>
+                        <span class="button is-dark">Hi, <%= current_user.name %></span>  | 
+                        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button is-dark' %>
+                    <% else %>
+
+                        <%= link_to "Login", new_user_session_path, class: 'button is-dark' %>
+                    <% end %>
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="section">
+        <%= yield %>
+    </div>
+</body>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </html>

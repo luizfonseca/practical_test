@@ -1,0 +1,42 @@
+    <h1 class="is-size-2 has-text-weight-bold">My Cart</h1>
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Products", products_path %></li>
+        <li class="is-active"><a href="#" aria-current="page">My Cart</a></li>
+      </ul>
+    </nav>
+
+
+<% unless @cart.present? %>
+    Nothing in your shopping cart yet. How about some shopping first? :-)
+<% else %>
+
+    <table class="table is-striped is-fullwidth">
+        <thead>
+            <th>Cover</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th> Price </th>
+
+        </thead>
+    <% @cart.cart_items.each do |item| %>
+        <tr>
+            <td><%= product_image %> </td> 
+            <td><%= item.name %></td>
+            <td>
+                <%= link_to "-", cart_decrease_product_path(item), class: 'button', method: :put %>
+                <span class="button is-white"><%= item.quantity %></span>
+                <%= link_to "+", cart_increase_product_path(item), class: 'button', method: :put%>
+            </td>
+            <td>$ <%= item.final_price %></td>
+        </tr>
+    <% end %>
+    </table>
+
+
+    <div>
+        <p class="has-text-right"><strong> Total: </strong> $ <%= @cart.total %></p>
+        <p class="has-text-right"><%= link_to "Checkout & Payment", "", class: 'button is-primary is-large' %> </p>
+    </div>
+<% end %>
