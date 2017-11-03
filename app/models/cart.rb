@@ -15,4 +15,6 @@ class Cart < ApplicationRecord
     def total
         self.cart_items.map(&:final_price).inject(:+).to_f
     end
+
+
 end

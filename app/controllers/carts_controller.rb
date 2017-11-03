@@ -11,13 +11,8 @@ class CartsController < ApplicationController
     # TODO: refactor
     def decrease_quantity
         @item = CartItem.find(params[:id])
-        @item.quantity -= 1
+        @item.decrease_quantity!
         @item.save!
-
-        if @item.quantity <= 0 
-            @item.destroy
-        end
-
         redirect_to cart_path
         
     end
@@ -25,9 +20,8 @@ class CartsController < ApplicationController
     # TODO: refactor
     def increase_quantity
         @item = CartItem.find(params[:id])
-        @item.quantity += 1
+        @item.increase_quantity!
         @item.save!
-
 
         redirect_to cart_path
     end
